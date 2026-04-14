@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-main-forest-green: #3A7D44;
+  --color-main-wood-brown: #735437;
+  --color-main-green: #38B14A;
+  --color-main-light-green: #95B299;
+
+  --font-title: var(--font-inter);
+  --font-subtitle: var(--font-pretendard);
+  --font-body: var(--font-inter);
+}
+
+@utility text-title-1 {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+@utility text-title-2 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+@utility text-title-3 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@utility text-subtitle-1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@utility text-subtitle-2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@utility text-subtitle-3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@utility text-body-1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+@utility text-body-2 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+@utility text-body-3 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+body {
+  @apply antialiased text-black;
+  font-family: var(--font-body);
+}
