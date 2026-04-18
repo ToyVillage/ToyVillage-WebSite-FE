@@ -1,6 +1,8 @@
-import Image from "next/image";
-import mainAnimal from "@/assets/MainAnimal.png"
-import NoticeList from "@/components/NoticeList";
+import Image from 'next/image';
+import Link from 'next/link';
+import mainAnimal from '@/assets/MainAnimal.png';
+import NoticeList from '@/components/NoticeList';
+import Sprout from '@/assets/Sprout.svg';
 
 export default function Home() {
   return (
@@ -24,8 +26,44 @@ export default function Home() {
       </section>
 
       <section className="w-full bg-white p-20">
-        <h2 className="text-title-2 text-black">Content Area</h2>
-        <NoticeList />
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-title-3 font-bold flex items-center gap-2">
+            <span className="text-main-forest-green">토이빌리지</span> 새소식
+            <img src={Sprout.src} alt="" aria-hidden="true" />
+          </h2>
+          <Link href="/news" className="text-body-3 text-gray-400 hover:text-black">
+            더 보러가기 &gt;
+          </Link>
+        </div>
+        <NoticeList
+          //서버 데이터
+          items={[
+            {
+              id: 1,
+              news_title: '뉴스제목1',
+              news_description: '뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용.',
+              news_postdate: '2025-XX-XX',
+            },
+            {
+              id: 2,
+              news_title: '뉴스제목2',
+              news_description: '뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용.',
+              news_postdate: '2025-XX-XX',
+            },
+            {
+              id: 3,
+              news_title: '뉴스제목3',
+              news_description: '뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용.',
+              news_postdate: '2025-XX-XX',
+            },
+            {
+              id: 4,
+              news_title: '뉴스제목3',
+              news_description: '뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용.',
+              news_postdate: '2025-XX-XX',
+            },
+          ]}
+        />
       </section>
     </main>
   );

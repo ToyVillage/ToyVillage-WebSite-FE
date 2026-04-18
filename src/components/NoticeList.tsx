@@ -1,32 +1,26 @@
-interface NoticeItem {
+export interface NewsItem {
   id: number;
-  title: string;
-  date: string;
+  news_title: string;
+  news_description: string;
+  news_postdate: string;
 }
 
-const notices: NoticeItem[] = [
-  { id: 1, title: "<토이빌리지> 즐거운 크리스마스는 토이빌리지에서 동물친구들과 함께 :)", date: "2025.12.24" },
-  { id: 2, title: "<토이빌리지> 즐거운 크리스마스는 토이빌리지에서 동물친구들과 함께 :)", date: "2025.12.24" },
-  { id: 3, title: "<토이빌리지> 즐거운 크리스마스는 토이빌리지에서 동물친구들과 함께 :)", date: "2025.12.24" },
-  { id: 4, title: "<토이빌리지> 즐거운 크리스마스는 토이빌리지에서 동물친구들과 함께 :)", date: "2025.12.24" },
-  { id: 5, title: "<토이빌리지> 즐거운 크리스마스는 토이빌리지에서 동물친구들과 함께 :)", date: "2025.12.24" },
-];
+interface NoticeListProps {
+  items: NewsItem[];
+}
 
-export default function NoticeList() {
+export default function NoticeList({ items }: NoticeListProps) {
   return (
-    <section aria-label="공지사항 목록">
+    <section aria-label="새소식 목록" className="border border-gray-200 rounded-xl p-4 shadow-md">
       <ul>
-        {notices.map((notice) => (
+        {items.map((item) => (
           <li
-            key={notice.id}
-            className="flex justify-between items-center px-6 py-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
+            key={item.id}
+            className="flex justify-between items-center border-b-2 border-dashed border-gray-200 hover:bg-gray-50 cursor-pointer px-[32px] py-[18px]"
           >
-            <span className="text-body-2 text-black truncate mr-8">{notice.title}</span>
-            <time
-              dateTime={notice.date.replace(/\./g, "-")}
-              className="text-body-3 text-gray-400 shrink-0"
-            >
-              {notice.date}
+            <span className="text-subtitle-2 text-black truncate mr-8 ">{item.news_title}</span>
+            <time dateTime={item.news_postdate} className="text-subtitle-3 text-gray-400 shrink-0">
+              {item.news_postdate}
             </time>
           </li>
         ))}
