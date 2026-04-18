@@ -1,5 +1,6 @@
 import Image from "next/image";
-import mainAnimal from "@/shared/assets/MainAnimal.png"
+import mainAnimal from "@/assets/MainAnimal.png"
+import NoticeList from "@/components/NoticeList";
 
 export default function Home() {
   return (
@@ -22,8 +23,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full h-[1000px] bg-white p-20">
+      <section className="w-full bg-white p-20">
         <h2 className="text-title-2 text-black">Content Area</h2>
+        <NoticeList />
       </section>
     </main>
   );

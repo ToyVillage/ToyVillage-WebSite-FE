@@ -1,5 +1,5 @@
-import { Logo } from "@/shared/assets/Logo";
-import FooterFence from "@/shared/assets/FooterFence.svg";
+import { Logo } from "@/components/Logo";
+import FooterFence from "@/assets/FooterFence.svg";
 
 export default function Footer() {
   return (
