@@ -23,17 +23,14 @@
       }
     ],
     "paths": {
-      "@/app/*": [
-        "./src/app/*"
+      "@/components/*": [
+        "./src/components/*"
       ],
-      "@/widgets/*": [
-        "./src/widgets/*"
+      "@/assets/*": [
+        "./src/assets/*"
       ],
-      "@/features/*": [
-        "./src/features/*"
-      ],
-      "@/shared/*": [
-        "./src/shared/*"
+      "@/constants/*": [
+        "./src/constants/*"
       ],
       "@/*": [
         "./src/*"
