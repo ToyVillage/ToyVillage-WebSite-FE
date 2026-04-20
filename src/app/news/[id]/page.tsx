@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import SubHeader from '@/components/SubHeader';
-import chinchilla from '@/assets/animals/Chinchilla.jpeg'
+import SubHeader from '@/components/layout/SubHeader';
+import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 
 interface NewsDetailPageProps {
   params: Promise<{ id: string }>;
@@ -31,12 +31,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
       <section className="px-20 py-20">
         <div className="relative w-full h-[439px] rounded-2xl overflow-hidden mb-8">
-          <Image
-            src={news.news_image_url}
-            alt={news.news_title}
-            fill
-            className="object-cover"
-          />
+          <Image src={news.news_image_url} alt={news.news_title} fill className="object-cover" />
         </div>
 
         <p className="text-body-2 text-black leading-relaxed">{news.news_description}</p>

@@ -29,7 +29,7 @@ export default function NewsCardGrid({ items }: NewsCardGridProps) {
               <div className="w-full h-full bg-gray-200" />
             )}
           </div>
-          <p className="text-subtitle-2 text-black mb-1 line-clamp-2">{item.news_title}</p>
+          <p className="text-subtitle-1 text-black mb-1 line-clamp-2">{item.news_title}</p>
           <div className="flex items-center justify-between mt-1">
             <Link
               href={`/news/${item.id}`}

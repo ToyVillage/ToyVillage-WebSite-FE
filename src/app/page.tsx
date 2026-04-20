@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Capybara from '@/assets/animals/Capybara.png';
-import NoticeList from '@/components/NoticeList';
+import NewsList from '@/components/domain/news/NewsList';
 import Sprout from '@/assets/Sprout.svg';
+import EventList from '@/components/domain/events/EventList';
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
             더 보러가기 &gt;
           </Link>
         </div>
-        <NoticeList
+        <NewsList
           //서버 데이터
           items={[
             {
@@ -63,6 +64,46 @@ export default function Home() {
               news_postdate: '2025-XX-XX',
             },
           ]}
+        />
+        <div className="flex justify-between items-center mt-[126px] mb-6">
+          <h2 className="text-title-3 font-bold flex items-center gap-2">
+            <span className="text-main-forest-green">토이빌리지</span> 이벤트
+            <img src={Sprout.src} alt="" aria-hidden="true" />
+          </h2>
+          <Link href="/news" className="text-body-3 text-gray-400 hover:text-black">
+            더 보러가기 &gt;
+          </Link>
+        </div>
+        <EventList 
+          items={[
+            {
+              event_id: 1,
+              event_name: "이벤트명",
+              event_description: "이벤트 소개",
+              event_start_date: "2026-02-06T19:56:53.62201",
+              event_end_date: "2026-02-07T19:56:53.62201",
+              event_subjects: "이벤트 대상자",
+              event_image_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400"
+            },
+            {
+              event_id: 2,
+              event_name: "이벤트명",
+              event_description: "이벤트 소개",
+              event_start_date: "2026-02-06T19:56:53.62201",
+              event_end_date: "2026-02-08T19:56:53.62201",
+              event_subjects: "이벤트 대상자",
+              event_image_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400"
+            },
+            {
+              event_id: 3,
+              event_name: "이벤트명",
+              event_description: "이벤트 소개",
+              event_start_date: "2026-02-06T19:56:53.62201",
+              event_end_date: "2026-02-08T19:56:53.62201",
+              event_subjects: "이벤트 대상자",
+              event_image_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400"
+            },
+          ]} 
         />
       </section>
     </main>
