@@ -14,7 +14,7 @@ interface NewsCardGridProps {
 }
 
 function isValidImageUrl(url: string) {
-  return url.startsWith("http://") || url.startsWith("https://") || url.startsWith("/");
+  return url.startsWith("https://") || url.startsWith("http://") || (url.startsWith("/") && !url.startsWith("//"));
 }
 
 export default function NewsCardGrid({ items }: NewsCardGridProps) {
@@ -31,7 +31,11 @@ export default function NewsCardGrid({ items }: NewsCardGridProps) {
           </div>
           <p className="text-subtitle-2 text-black mb-1 line-clamp-2">{item.news_title}</p>
           <div className="flex items-center justify-between mt-1">
-            <Link href={`/news/${item.id}`} className="text-body-3 text-gray-400 hover:text-black">
+            <Link
+              href={`/news/${item.id}`}
+              aria-label={`${item.news_title} 자세히 보기`}
+              className="text-body-3 text-gray-400 hover:text-black"
+            >
               자세히 &gt;
             </Link>
           </div>

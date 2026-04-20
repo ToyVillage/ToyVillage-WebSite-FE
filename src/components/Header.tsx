@@ -28,14 +28,15 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll(); 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 z-50 w-full transition-all duration-300 ease-in-out h-[100px] flex items-center',
+        'fixed top-0 left-0 z-50 w-full transition-all duration-100 ease-in-out h-[100px] flex items-center',
         isScrolled ? 'bg-white shadow-md' : 'bg-transparent',
       )}
     >
@@ -43,13 +44,13 @@ export default function Header() {
         <Link
           href="/"
           className={cn(
-            'shrink-0 transition-colors duration-300',
+            'shrink-0 transition-colors duration-100',
             isScrolled ? 'text-black' : 'text-white',
           )}
         >
           <Logo
             className={cn(
-              'w-[237px] h-[100px] transition-colors duration-300',
+              'w-[237px] h-[100px] transition-colors duration-100',
               isScrolled ? 'text-black' : 'text-white',
             )}
           />
@@ -82,7 +83,7 @@ export default function Header() {
                     isScrolled ? "bg-black" : "bg-white"
                   )} />
                 )} */}
-              </Link> 
+              </Link>
             );
           })}
         </nav>

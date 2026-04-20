@@ -34,7 +34,11 @@ export default function EventCardGrid({ items }: EventCardGridProps) {
           <p className="text-subtitle-2 text-black mb-1 line-clamp-2">{item.event_name}</p>
           <div className="flex items-center justify-between mt-1">
             <span className="text-body-3 text-gray-400">{item.event_subjects}</span>
-            <Link href={`/event/${item.event_id}`} className="text-body-3 text-gray-400 hover:text-black">
+            <Link
+              href={`/event/${item.event_id}`}
+              aria-label={`${item.event_name} 자세히 보기`}
+              className="text-body-3 text-gray-400 hover:text-black"
+            >
               자세히 &gt;
             </Link>
           </div>
