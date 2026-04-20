@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import mainAnimal from '@/assets/MainAnimal.png';
+import Capybara from '@/assets/animals/Capybara.png';
 import NoticeList from '@/components/NoticeList';
 import Sprout from '@/assets/Sprout.svg';
 
@@ -9,7 +9,7 @@ export default function Home() {
     <main>
       <section className="relative w-full h-195.5 overflow-hidden">
         <Image
-          src={mainAnimal}
+          src={Capybara}
           alt="카피바라 가족이 물가에 모여있는 모습"
           placeholder="blur"
           fill

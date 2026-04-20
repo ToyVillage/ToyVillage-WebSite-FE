@@ -39,7 +39,7 @@ export default function Header() {
         isScrolled ? 'bg-white shadow-md' : 'bg-transparent',
       )}
     >
-      <div className="max-w-[1200px] mx-auto w-full flex items-center px-6">
+      <div className="max-w-[1200px] mx-[86px] w-full flex items-center gap-[80px]">
         <Link
           href="/"
           className={cn(
@@ -55,7 +55,7 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="flex items-center ml-16 h-[80px]">
+        <nav className="flex items-center h-[80px]">
           {NAV_ITEMS.map((item) => {
             const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
 
@@ -82,7 +82,7 @@ export default function Header() {
                     isScrolled ? "bg-black" : "bg-white"
                   )} />
                 )} */}
-              </Link>
+              </Link> 
             );
           })}
         </nav>
