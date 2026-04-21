@@ -11,7 +11,7 @@ interface NoticeListProps {
   items: NewsItem[];
 }
 
-export default function NoticeList({ items }: NoticeListProps) {
+export default function NewsList({ items }: NoticeListProps) {
   return (
     <section aria-label="새소식 목록" className="border border-gray-200 rounded-xl p-4 shadow-md">
       <ul>

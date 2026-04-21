@@ -1,16 +1,13 @@
-import CardGrid from '@/components/NewsCardGrid';
-import SubHeader from '@/components/SubHeader';
+import NewsCardGrid from '@/components/domain/news/NewsCardGrid';
+import SubHeader from '@/components/layout/SubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 
 export default function News() {
   return (
     <>
-      <SubHeader 
-        imageSrc={chinchilla} 
-        title="새소식" 
-        subtitle="Toy village News" />
+      <SubHeader imageSrc={chinchilla} title="새소식" subtitle="Toy village News" />
       <main className="w-full bg-white px-20 py-12">
-        <CardGrid
+        <NewsCardGrid
           items={[
             {
               id: 1,
