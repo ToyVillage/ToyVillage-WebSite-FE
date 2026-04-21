@@ -70,7 +70,7 @@ export default function Home() {
             <span className="text-main-forest-green">토이빌리지</span> 이벤트
             <img src={Sprout.src} alt="" aria-hidden="true" />
           </h2>
-          <Link href="/news" className="text-body-3 text-gray-400 hover:text-black">
+          <Link href="/events" className="text-body-3 text-gray-400 hover:text-black">
             더 보러가기 &gt;
           </Link>
         </div>

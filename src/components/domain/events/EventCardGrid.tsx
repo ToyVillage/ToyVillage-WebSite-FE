@@ -21,7 +21,7 @@ function isValidImageUrl(url: string) {
 
 function formatEventDate(iso: string) {
   const d = new Date(iso);
-  return `${d.getMonth() + 1}/${d.getDate()}`;
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
 }
 
 export default function EventCardGrid({ items }: EventCardGridProps) {
