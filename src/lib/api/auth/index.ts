@@ -1,6 +1,6 @@
 import { userApi } from "@/lib/axios";
-import { LoginRequest, SignUpRequest } from "./request";
-import { LoginResponse, SignUpResponse } from "./response";
+import { LoginRequest, ReissueRequest, SignUpRequest } from "./request";
+import { LoginResponse, ReissueResponse, SignUpResponse } from "./response";
 
 const router = "/auth";
 
@@ -11,5 +11,10 @@ return data;
 
 export const signup = async (body: SignUpRequest) => {
   const { data } = await userApi.post<SignUpResponse>(`${router}/signup`, body);
+  return data;
+};
+
+export const reissue = async (body: ReissueRequest) => {
+  const { data } = await userApi.post<ReissueResponse>(`${router}/reissue`, body);
   return data;
 };

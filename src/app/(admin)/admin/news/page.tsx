@@ -15,7 +15,7 @@ export default function AdminNewsPage() {
 
   const { data } = useQuery({
     queryKey: ['news', currentPage],
-    queryFn: () => getNewsList(currentPage - 1),
+    queryFn: () => getNewsList(currentPage - 1, 100),
   });
 
   const { mutate: remove } = useMutation({

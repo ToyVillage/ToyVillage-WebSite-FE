@@ -27,9 +27,9 @@ export interface EventRequest {
   file_key: string;
 }
 
-export async function getEvents(page: number): Promise<SpringPage<EventItem>> {
+export async function getEvents(page: number, size: number = 8): Promise<SpringPage<EventItem>> {
   const { data } = await userApi.get<SpringPage<EventItem>>('/events', {
-    params: { page, size: 8 },
+    params: { page, size },
   });
   return data;
 }

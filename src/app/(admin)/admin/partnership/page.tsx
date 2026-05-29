@@ -1,11 +1,13 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { getPartnerships } from '@/lib/api/partnership';
 
 export default function AdminPartnershipPage() {
+  const router = useRouter();
   const { data: partnerships = [] } = useQuery({
     queryKey: ['partnership'],
     queryFn: getPartnerships,
@@ -14,7 +16,7 @@ export default function AdminPartnershipPage() {
   return (
     <>
       <AdminSubHeader imageSrc={chinchilla} title="TOY VILLAGE" subtitle="제휴 문의" />
-      <main className="w-full bg-white px-20 py-12">
+      <main className="w-full px-20 py-12">
         <div className="w-full overflow-hidden rounded-xl border border-gray-200">
           <table className="w-full">
             <thead className="bg-gray-50">
@@ -32,7 +34,7 @@ export default function AdminPartnershipPage() {
                 </tr>
               ) : (
                 partnerships.map((p) => (
-                  <tr key={p.id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={p.id} onClick={() => router.push(`/admin/partnership/${p.id}`)} className="hover:bg-gray-50/50 transition-colors cursor-pointer">
                     <td className="px-6 py-4 text-body-3 text-black">{p.title}</td>
                     <td className="px-6 py-4 text-body-3 text-gray-300 text-right whitespace-nowrap">
                       {p.received_Date ? p.received_Date.slice(0, 10).replace(/-/g, '.') : '-'}

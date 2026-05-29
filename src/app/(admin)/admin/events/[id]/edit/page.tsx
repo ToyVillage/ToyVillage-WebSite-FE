@@ -42,8 +42,8 @@ export default function EditEventPage({ params }: EditEventPageProps) {
       setForm({
         event_name: data.eventName,
         event_description: data.eventDescription,
-        event_start_date: data.eventStartDate.slice(0, 10),
-        event_end_date: data.eventEndDate.slice(0, 10),
+        event_start_date: data.eventStartDate?.slice(0, 10) ?? '',
+        event_end_date: data.eventEndDate?.slice(0, 10) ?? '',
         event_subjects: data.eventSubjects,
       });
       const key = data.fileKey ?? '';

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import SubHeader from '@/components/layout/SubHeader';
@@ -9,16 +10,31 @@ interface NewsDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+export async function generateMetadata({ params }: NewsDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const news = await getNewsById(Number(id));
+  return {
+    title: news.title,
+    description: news.description?.slice(0, 160),
+    openGraph: {
+      title: news.title,
+      description: news.description?.slice(0, 160),
+      images: news.file_keys[0] ? [IMAGE_BASE_URL + news.file_keys[0]] : [],
+    },
+  };
+}
+
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const { id } = await params;
   const news = await getNewsById(Number(id));
   const imageUrl = news.file_keys[0] ? IMAGE_BASE_URL + news.file_keys[0] : '';
+  const formattedDate = news.postdate?.slice(0, 10).replace(/-/g, '.') ?? '';
 
   return (
     <main>
       <SubHeader
         title={news.title}
-        subtitle={news.postdate}
+        subtitle={formattedDate}
         imageSrc={chinchilla}
         imageAlt={news.title}
       />

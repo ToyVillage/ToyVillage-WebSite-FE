@@ -8,6 +8,9 @@ import pictureIcon from '@/assets/admin/pictureIcon.svg';
 import newsIcon from '@/assets/admin/newsIcon.svg';
 import handsIcon from '@/assets/admin/handsIcon.svg';
 import AnimalSliderSection from '@/components/layout/AnimalSliderSection';
+import { getAnimals } from '@/lib/api/animals';
+import { getGalleries } from '@/lib/api/gallery';
+import { IMAGE_BASE_URL } from '@/lib/api/file';
 
 export const metadata: Metadata = { title: '토이빌리지 | 관리자' };
 
@@ -19,7 +22,33 @@ const cards = [
   { title: '제휴문의', href: '/admin/partnership', imageSrc: handsIcon, imageAlt: '제휴문의 바로가기 일러스트' },
 ];
 
-export default function Admin() {
+export default async function Admin() {
+  const [galleriesResult, animalsResult] = await Promise.allSettled([
+    getGalleries(0),
+    getAnimals(),
+  ]);
+
+  const galleryImages = galleriesResult.status === 'fulfilled'
+    ? galleriesResult.value.content
+        .filter((g) => g.gallery_file_key)
+        .map((g) => IMAGE_BASE_URL + g.gallery_file_key)
+    : [];
+
+  const animalImages = animalsResult.status === 'fulfilled'
+    ? [
+        ...animalsResult.value.mammals,
+        ...animalsResult.value.reptiles,
+        ...animalsResult.value.fish,
+        ...animalsResult.value.birds,
+      ]
+        .filter((a) => a.animal_image)
+        .map((a) => a.animal_image)
+    : [];
+
+  const allSliderImages = [...animalImages, ...galleryImages];
+  const sliderRow1 = allSliderImages.filter((_, i) => i % 2 === 0);
+  const sliderRow2 = allSliderImages.filter((_, i) => i % 2 !== 0);
+
   return (
     <>
       <AdminSubHeader imageSrc={chinchilla} title="관리자" subtitle="Toy Village Admin" />
@@ -35,25 +64,7 @@ export default function Admin() {
             <p className="text-title-3 text-black">직접 체험하며 즐기는</p>
             <p className="text-title-1 font-bold text-black">Toy Village</p>
           </div>
-          <AnimalSliderSection
-            row1={[
-              'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400',
-              'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400',
-              'https://images.unsplash.com/photo-1527980965560-1e2bde8f0ec0?w=400',
-              'https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=400',
-              'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400',
-              'https://images.unsplash.com/photo-1507888843-4e0ba8d5b74d?w=400',
-              'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400',
-            ]}
-            row2={[
-              'https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400',
-              'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400',
-              'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400',
-              'https://images.unsplash.com/photo-1437622368342-7a3d73a3a2f3?w=400',
-              'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=400',
-              'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
-            ]}
-          />
+          <AnimalSliderSection row1={sliderRow1} row2={sliderRow2} />
         </section>
       </main>
     </>

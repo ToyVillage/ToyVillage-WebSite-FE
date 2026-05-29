@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Capybara from '@/assets/animals/Capybara.png';
-import NewsList from '@/components/domain/news/NewsList';
+import { NewsList } from '@/components/domain/news/NewsList';
 import Sprout from '@/assets/Sprout.svg';
-import EventList from '@/components/domain/events/EventList';
+import { EventList } from '@/components/domain/events/EventList';
 import AnimalSliderSection from '@/components/layout/AnimalSliderSection';
 import { getNewsList } from '@/lib/api/news';
 import { getEvents } from '@/lib/api/events';
@@ -13,31 +13,37 @@ import { IMAGE_BASE_URL } from '@/lib/api/file';
 
 export default async function Home() {
   const [newsResult, eventsResult, galleriesResult, animalsResult] = await Promise.allSettled([
-    getNewsList(0),
-    getEvents(0),
+    getNewsList(0, 5),
+    getEvents(0, 3),
     getGalleries(0),
     getAnimals(),
   ]);
 
-  const newsItems = newsResult.status === 'fulfilled' ? newsResult.value.content.slice(0, 4) : [];
-  const eventItems = eventsResult.status === 'fulfilled' ? eventsResult.value.content.slice(0, 3) : [];
+  const newsItems = newsResult.status === 'fulfilled' ? newsResult.value.content.slice(0, 5) : [];
+  const eventItems = eventsResult.status === 'fulfilled' ? eventsResult.value.content : [];
 
-  const galleryImages = galleriesResult.status === 'fulfilled'
-    ? galleriesResult.value.content
-        .filter((g) => g.gallery_file_key)
-        .map((g) => IMAGE_BASE_URL + g.gallery_file_key)
-    : [];
+  const galleryImages =
+    galleriesResult.status === 'fulfilled'
+      ? galleriesResult.value.content
+          .filter((g) => g.gallery_file_key)
+          .map((g) => IMAGE_BASE_URL + g.gallery_file_key)
+      : [];
 
-  const animalImages = animalsResult.status === 'fulfilled'
-    ? [
-        ...animalsResult.value.mammals,
-        ...animalsResult.value.reptiles,
-        ...animalsResult.value.fish,
-        ...animalsResult.value.birds,
-      ]
-        .filter((a) => a.animal_image)
-        .map((a) => a.animal_image)
-    : [];
+  const animalImages =
+    animalsResult.status === 'fulfilled'
+      ? [
+          ...animalsResult.value.mammals,
+          ...animalsResult.value.reptiles,
+          ...animalsResult.value.fish,
+          ...animalsResult.value.birds,
+        ]
+          .filter((a) => a.animal_image)
+          .map((a) => a.animal_image)
+      : [];
+
+  const allSliderImages = [...animalImages, ...galleryImages];
+  const sliderRow1 = allSliderImages.filter((_, i) => i % 2 === 0);
+  const sliderRow2 = allSliderImages.filter((_, i) => i % 2 !== 0);
 
   return (
     <main>
@@ -91,7 +97,7 @@ export default async function Home() {
           <p className="text-title-3 text-black">직접 체험하며 즐기는</p>
           <p className="text-title-1 font-bold text-black">Toy Village</p>
         </div>
-        <AnimalSliderSection row1={animalImages} row2={galleryImages} />
+        <AnimalSliderSection row1={sliderRow1} row2={sliderRow2} />
       </section>
     </main>
   );

@@ -1,9 +1,9 @@
 import { adminApi, userApi } from '@/lib/axios';
 
 export interface FaqItem {
-  questionId: number;
-  questionContent: string;
-  questionAnswer: string;
+  question_id: number;
+  question_content: string;
+  question_answer: string;
 }
 
 export interface FaqRequest {

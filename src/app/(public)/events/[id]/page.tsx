@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import SubHeader from '@/components/layout/SubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { getEventById } from '@/lib/api/events';
+import { IMAGE_BASE_URL } from '@/lib/api/file';
 
 interface EventsDetailPageProps {
   params: Promise<{ id: string }>;
@@ -23,26 +24,28 @@ export default function EventsDetailPage({ params }: EventsDetailPageProps) {
 
   const dateRange = (() => {
     if (!event) return '';
-    const s = new Date(event.event_start_date);
-    const e = new Date(event.event_end_date);
+    const s = new Date(event.eventStartDate);
+    const e = new Date(event.eventEndDate);
     return `${s.getFullYear()} ${s.getMonth() + 1}/${s.getDate()} ~ ${e.getMonth() + 1}/${e.getDate()}`;
   })();
+
+  const imageUrl = event?.fileKey ? IMAGE_BASE_URL + event.fileKey : '';
 
   return (
     <main>
       <SubHeader
-        title={event?.event_name ?? ''}
+        title={event?.eventName ?? ''}
         subtitle={dateRange}
         imageSrc={chinchilla}
-        imageAlt={event?.event_name ?? ''}
+        imageAlt={event?.eventName ?? ''}
       />
       <section className="px-20 py-20">
-        {event?.event_image_url && (
+        {imageUrl && (
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8">
-            <Image src={event.event_image_url} alt={event.event_name} fill className="object-cover" unoptimized />
+            <Image src={imageUrl} alt={event?.eventName ?? ''} fill className="object-cover" unoptimized />
           </div>
         )}
-        <p className="text-body-2 text-black leading-relaxed">{event?.event_description}</p>
+        <p className="text-body-2 text-black leading-relaxed">{event?.eventDescription}</p>
         <div className="flex justify-end mt-16">
           <button
             onClick={router.back}

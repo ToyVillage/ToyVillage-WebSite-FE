@@ -7,3 +7,7 @@ export interface SignUpRequest {
   email: string;
   password: string;
 }
+
+export interface ReissueRequest {
+  email: string;
+}

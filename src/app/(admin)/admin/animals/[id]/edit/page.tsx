@@ -51,9 +51,16 @@ export default function EditAnimalPage({ params }: EditAnimalPageProps) {
   const imagePreview = uploadedPreview || data?.animal_image || '';
 
   const { mutate: update, isPending: isUpdating } = useMutation({
-    mutationFn: () => {
+    mutationFn: async () => {
       const formData = new FormData();
-      if (imageFile) formData.append('animalImage', imageFile);
+      if (imageFile) {
+        formData.append('animalImage', imageFile);
+      } else if (data?.animal_image) {
+        const res = await fetch(data.animal_image);
+        const blob = await res.blob();
+        const fileName = data.animal_image.split('/').pop() ?? 'image';
+        formData.append('animalImage', new File([blob], fileName, { type: blob.type }));
+      }
       formData.append('animalKind', fields.animalKind);
       formData.append('animalDescription', fields.animalDescription);
       formData.append('animalType', fields.animalType);

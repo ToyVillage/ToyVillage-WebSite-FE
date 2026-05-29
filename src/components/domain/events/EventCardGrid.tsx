@@ -23,7 +23,7 @@ interface EventCardGridProps {
 
 function formatEventDate(iso: string) {
   const d = new Date(iso);
-  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
+  return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
 export default function EventCardGrid({ items, isAdmin = false, onDelete }: EventCardGridProps) {

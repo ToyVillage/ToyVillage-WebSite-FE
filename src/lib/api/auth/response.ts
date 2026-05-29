@@ -2,6 +2,10 @@ export interface LoginResponse {
   access_token: string;
 }
 
+export interface ReissueResponse {
+  accessToken: string;
+}
+
 export interface SignUpResponse {
   massage: string;
 }

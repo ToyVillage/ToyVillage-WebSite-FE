@@ -11,6 +11,12 @@ interface PartnershipDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+const PARTNERSHIP_TYPE_LABELS: Record<string, string> = {
+  MARKETING: '마케팅',
+  STORE_OPENING: '입점',
+  OTHER: '기타',
+};
+
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex border-b border-gray-100 py-4">
@@ -35,20 +41,19 @@ export default function PartnershipDetailPage({ params }: PartnershipDetailPageP
   return (
     <>
       <AdminSubHeader imageSrc={chinchilla} title="TOY VILLAGE" subtitle="제휴 문의 상세" />
-      <main className="w-full bg-white px-20 py-12">
+      <main className="w-full  px-20 py-12">
         <div>
           <dl>
-            <DetailRow label="문의 유형" value={detail.inquiry_type} />
-            <DetailRow label="제목" value={detail.title} />
-            <DetailRow label="이름" value={detail.name} />
-            <DetailRow label="이메일" value={detail.email} />
-            <DetailRow label="연락처" value={detail.phone} />
-            <DetailRow label="등록일" value={detail.created_at} />
+            <DetailRow label="문의 유형" value={PARTNERSHIP_TYPE_LABELS[detail.partnership_type] ?? detail.partnership_type} />
+            <DetailRow label="제목" value={detail.partnership_title} />
+            <DetailRow label="이메일" value={detail.partnership_email} />
+            <DetailRow label="연락처" value={detail.partnership_phone_number} />
+            <DetailRow label="등록일" value={detail.partnership_created_at?.slice(0, 10).replace(/-/g, '.') ?? ''} />
           </dl>
           <div className="mt-6">
             <p className="text-body-3 font-semibold text-gray-500 mb-2">문의 내용</p>
-            <div className="rounded-xl bg-gray-50 px-6 py-5 text-body-3 text-black leading-relaxed whitespace-pre-wrap">
-              {detail.content}
+            <div className="rounded-xl bg-gray-200 px-6 py-5 text-body-3 text-black leading-relaxed whitespace-pre-wrap">
+              {detail.partnership_content}
             </div>
           </div>
           <div className="flex justify-end mt-8">

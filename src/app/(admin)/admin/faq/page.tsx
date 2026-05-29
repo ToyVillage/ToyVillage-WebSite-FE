@@ -18,13 +18,13 @@ export default function AdminFaqPage() {
   return (
     <>
       <AdminSubHeader imageSrc={chinchilla} title="TOY VILLAGE" subtitle="자주 묻는 질문" />
-      <main className="w-full bg-white px-20 py-12">
+      <main className="w-full px-20 py-12">
         <div className="mb-5">
           <AddButton href="/admin/faq/add" />
         </div>
         <div className="w-full overflow-hidden rounded-xl border border-gray-200">
           <table className="w-full text-left">
-            <thead className="bg-gray-50">
+            <thead className="bg-white">
               <tr>
                 <th className="px-6 py-4 text-body-3 font-semibold text-gray-600">질문</th>
               </tr>
@@ -39,12 +39,12 @@ export default function AdminFaqPage() {
               ) : (
                 faqs.map((faq) => (
                   <tr
-                    key={faq.questionId}
-                    onClick={() => router.push(`/admin/faq/${faq.questionId}`)}
+                    key={faq.question_id}
+                    onClick={() => router.push(`/admin/faq/${faq.question_id}`)}
                     className="cursor-pointer hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="px-6 py-4 text-body-3 text-black">
-                      {faq.questionContent}
+                      {faq.question_content}
                     </td>
                   </tr>
                 ))

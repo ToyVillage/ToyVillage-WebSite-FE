@@ -20,7 +20,7 @@ export default function AdminPopupPage() {
   return (
     <>
       <AdminSubHeader imageSrc={capybara} title="TOY VILLAGE" subtitle="팝업 관리" />
-      <main className="w-full bg-white px-20 py-12">
+      <main className="w-full px-20 py-12">
         <div className="mb-5">
           <AddButton href="/admin/popup/add" />
         </div>

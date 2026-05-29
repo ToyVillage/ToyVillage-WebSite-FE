@@ -23,12 +23,12 @@ export default function FaqDetailPage({ params }: FaqDetailPageProps) {
     queryKey: ['faq', numId],
     queryFn: () => getFaqById(numId),
     initialData: () =>
-      queryClient.getQueryData<FaqItem[]>(['faq'])?.find((f) => f.questionId === numId),
+      queryClient.getQueryData<FaqItem[]>(['faq'])?.find((f) => f.question_id === numId),
   });
 
   const form: FaqRequest = {
-    question_content: edits.question_content ?? data?.questionContent ?? '',
-    question_answer: edits.question_answer ?? data?.questionAnswer ?? '',
+    question_content: edits.question_content ?? data?.question_content ?? '',
+    question_answer: edits.question_answer ?? data?.question_answer ?? '',
   };
 
   const { mutate: update, isPending: isUpdating } = useMutation({

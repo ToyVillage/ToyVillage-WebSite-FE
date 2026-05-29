@@ -57,7 +57,7 @@ export default function LoginPage(): JSX.Element {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <main className="flex h-[437px] bg-white w-[600px] flex-col overflow-hidden rounded-2xl shadow-xl">
+      <main className="flex h-[437px] w-[600px] flex-col overflow-hidden rounded-2xl shadow-xl">
         <h1 className="mt-12 text-center text-xl font-bold tracking-tight text-black">
           ADMIN 로그인
         </h1>

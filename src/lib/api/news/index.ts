@@ -15,9 +15,9 @@ export interface NewsRequest {
   file_keys: string[];
 }
 
-export async function getNewsList(page: number): Promise<SpringPage<NewsItem>> {
+export async function getNewsList(page: number, size: number = 8): Promise<SpringPage<NewsItem>> {
   const { data } = await userApi.get<SpringPage<NewsItem>>('/news', {
-    params: { page, size: 8 },
+    params: { page, size },
   });
   return data;
 }

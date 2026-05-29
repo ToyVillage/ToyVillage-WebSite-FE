@@ -19,7 +19,7 @@ export function FaqFloat() {
   return (
     <div className="fixed bottom-8 right-8 z-60 flex flex-col items-end gap-3">
       {isOpen && (
-        <div className="w-80 rounded-2xl bg-white shadow-2xl border border-gray-100 overflow-hidden">
+        <div className="w-80 rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
           <div className="bg-[#1E1E1E] px-5 py-4 flex items-center justify-between">
             <span className="text-white font-semibold text-body-3">자주 묻는 질문</span>
             <button
@@ -31,14 +31,14 @@ export function FaqFloat() {
               </svg>
             </button>
           </div>
-          <div className="divide-y divide-gray-100 max-h-96 overflow-y-auto">
+          <div className="divide-y divide-gray-100 max-h-96 overflow-y-auto bg-white">
             {faqs.map((faq) => (
-              <div key={faq.questionId}>
+              <div key={faq.question_id}>
                 <button
-                  onClick={() => toggle(faq.questionId)}
-                  className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition"
+                  onClick={() => toggle(faq.question_id)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left bg-white transition"
                 >
-                  <span className="text-body-3 text-black pr-4">{faq.questionContent}</span>
+                  <span className="text-body-3 text-black pr-4">{faq.question_content}</span>
                   <svg
                     width="16"
                     height="16"
@@ -46,14 +46,14 @@ export function FaqFloat() {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    className={`shrink-0 transition-transform duration-200 ${openId === faq.questionId ? 'rotate-180' : ''}`}
+                    className={`shrink-0 transition-transform duration-200 ${openId === faq.question_id ? 'rotate-180' : ''}`}
                   >
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 </button>
-                {openId === faq.questionId && (
-                  <div className="px-5 pb-4 text-body-3 text-gray-500 bg-gray-50 leading-relaxed">
-                    {faq.questionAnswer}
+                {openId === faq.question_id && (
+                  <div className="px-5 p-3 text-body-3 text-gray-600 bg-gray-100 leading-relaxed">
+                    {faq.question_answer}
                   </div>
                 )}
               </div>
