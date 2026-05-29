@@ -44,7 +44,7 @@
     ".next/types/**/*.ts",
     "**/*.mts",
     ".next/dev/types/**/*.ts"
-, "tailwind.config.js"  ],
+, "tailwind.config.js", ".vscode/middleware.ts"  ],
   "exclude": [
     "node_modules"
   ]

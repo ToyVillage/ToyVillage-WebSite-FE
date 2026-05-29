@@ -1,11 +1,11 @@
 import { Logo } from '@/assets/Logo';
-import FooterFence from '@/assets/FooterFence.svg';
+import Fence from '@/assets/Fence.svg';
 
 export default function Footer() {
   return (
     <>
       <div className="overflow-hidden flex justify-center" aria-hidden="true">
-        <img src={FooterFence.src} alt="" className="shrink-0" />
+        <img src={Fence.src} alt="" className="shrink-0 w-full" />
       </div>
       <footer
         className="w-full bg-main-forest-green text-white/90 py-[35] px-[60]"

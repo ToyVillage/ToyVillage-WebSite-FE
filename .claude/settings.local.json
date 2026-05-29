@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm \"c:/Users/user/toy-village/src/app/page.tsx\" \"c:/Users/user/toy-village/src/app/about/page.tsx\" \"c:/Users/user/toy-village/src/app/events/page.tsx\" \"c:/Users/user/toy-village/src/app/events/[id]/page.tsx\" \"c:/Users/user/toy-village/src/app/news/page.tsx\" \"c:/Users/user/toy-village/src/app/news/[id]/page.tsx\")",
+      "Bash(rmdir \"c:/Users/user/toy-village/src/app/about\" \"c:/Users/user/toy-village/src/app/events/[id]\" \"c:/Users/user/toy-village/src/app/events\" \"c:/Users/user/toy-village/src/app/news/[id]\" \"c:/Users/user/toy-village/src/app/news\")",
+      "Bash(npm install *)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\user\\\\toy-village\\\\src\\\\lib\\\\api\\\\events\")",
+      "Bash(mkdir -p \"c:/Users/user/toy-village/src/app/\\(admin\\)/admin/faq/add\" && mkdir -p \"c:/Users/user/toy-village/src/app/\\(admin\\)/admin/faq/[id]\")",
+      "Bash(mkdir -p \"c:/Users/user/toy-village/src/app/\\(admin\\)/admin/animals/add\" && mkdir -p \"c:/Users/user/toy-village/src/app/\\(admin\\)/admin/animals/[id]/edit\")",
+      "Bash(npx tsc *)",
+      "Bash(gh issue create --title 'feat: 팝업 유저뷰 — 홈 자동 모달' --body ' *)",
+      "PowerShell(npx tsc --noEmit 2>&1)",
+      "Bash(git checkout *)",
+      "Bash(npm run *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\user\\toy-village\\src\\lib\\api",
+      "c:\\Users\\user\\toy-village\\src\\app\\(admin)\\admin\\faq",
+      "c:\\Users\\user\\toy-village\\src\\app\\(admin)\\admin\\animals\\[id]"
+    ]
+  }
+}
