@@ -1,16 +1,49 @@
 {
+  /* 1. 기본 에디터 설정 */
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+
+  /* 2. ESLint 및 저장 시 자동 수정 */
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.formatDocument": "explicit" // 저장 시 Prettier 정렬 실행
   },
-  "eslint.workingDirectories": [
-    { "mode": "auto" }
-  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+
+  /* 3. 테일윈드 CSS 자동완성 핵심 설정 (v4 대응) */
+  // v4는 CSS 파일을 직접 지정해줘야 자동완성이 활성화됩니다.
+  "tailwindCSS.experimental.configFile": "src/app/globals.css",
+  
+  // 자동완성 추천 창이 즉시 뜨도록 설정
+  "editor.quickSuggestions": {
+    "strings": "on",
+    "other": "on",
+    "comments": "off"
+  },
+
+  // 테일윈드가 작동할 파일 형식 명시
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascriptreact",
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact",
+    "html": "html",
+    "css": "css"
+  },
+
+  /* 4. 기타 유용한 설정 */
+  "emmet.includeLanguages": {
+    "javascriptreact": "javascriptreact",
+    "typescriptreact": "typescriptreact"
+  },
+  // 클래스 이름 자동완성 시 미리보기 지원
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.emmetCompletions": true
 }

@@ -9,6 +9,9 @@
   --font-title: var(--font-inter);
   --font-subtitle: var(--font-pretendard);
   --font-body: var(--font-inter);
+
+  --animate-slide-left: slide-left 30s linear infinite;
+  --animate-slide-right: slide-right 30s linear infinite;
 }
 
 @utility text-title-1 {
@@ -62,4 +65,26 @@
 body {
   @apply antialiased text-black;
   font-family: var(--font-body);
+  display: 'swap',
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 사이드바 메뉴 클릭 시 섹션 제목이 상단 바에 가려지지 않게 여백 추가 */
+section {
+  scroll-margin-top: 5rem; /* 원하는 만큼 여백 조절 */
+}
+
+@keyframes slide-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes slide-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+

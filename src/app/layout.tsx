@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import Header from "@/components/layout/Header";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
+import { QueryProvider } from "@/components/common/QueryProvider";
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -38,17 +39,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={`${inter.variable} ${pretendard.variable}`}>
-      <body 
-        className="font-body text-black antialiased min-h-screen flex flex-col" 
-        suppressHydrationWarning={true}
-      >
-        <Header />
-
-        <main className="flex-1">
-          {children}
-        </main>
-
-        <Footer />
+      <body className="antialiased min-h-screen" suppressHydrationWarning={true}>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

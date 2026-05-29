@@ -2,12 +2,17 @@ import Image, { StaticImageData } from 'next/image';
 
 interface SubHeaderProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   imageSrc?: StaticImageData;
   imageAlt?: string;
 }
 
-export default function SubHeader({ title, subtitle, imageSrc, imageAlt = '' }: SubHeaderProps) {
+export default function SubHeader({ 
+  title, 
+  subtitle, 
+  imageSrc, 
+  imageAlt = '' 
+}: SubHeaderProps) {
   return (
     <div className="relative w-full h-80 overflow-hidden">
       {imageSrc ? <Image src={imageSrc} alt={imageAlt} fill className="object-cover" /> : null}
