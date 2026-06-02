@@ -1,7 +1,7 @@
 'use client';
 
-import { use, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
@@ -9,20 +9,21 @@ import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { deleteNews, getNewsById, updateNews } from '@/lib/api/news';
 import { uploadFile, IMAGE_BASE_URL } from '@/lib/api/file';
 
-interface EditNewsPageProps {
-  params: Promise<{ id: string }>;
-}
+type FormEdits = {
+  news_title?: string;
+  news_description?: string;
+};
 
-export default function EditNewsPage({ params }: EditNewsPageProps) {
-  const { id } = use(params);
+export default function EditNewsPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [form, setForm] = useState({ news_title: '', news_description: '' });
-  const [fileKey, setFileKey] = useState('');
-  const [imagePreview, setImagePreview] = useState('');
+  const [edits, setEdits] = useState<FormEdits>({});
+  const [newFileKey, setNewFileKey] = useState('');
+  const [uploadedPreview, setUploadedPreview] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -31,17 +32,20 @@ export default function EditNewsPage({ params }: EditNewsPageProps) {
     queryFn: () => getNewsById(numId),
   });
 
-  useEffect(() => {
-    if (data) {
-      setForm({ news_title: data.title, news_description: data.description });
-      const key = data.file_keys[0] ?? '';
-      setFileKey(key);
-      setImagePreview(key ? IMAGE_BASE_URL + key : '');
-    }
-  }, [data]);
+  const form = {
+    news_title: edits.news_title ?? data?.title ?? '',
+    news_description: edits.news_description ?? data?.description ?? '',
+  };
+  const dataFileKey = data?.file_keys?.[0] ?? '';
+  const fileKey = newFileKey || dataFileKey;
+  const imagePreview = uploadedPreview || (dataFileKey ? IMAGE_BASE_URL + dataFileKey : '');
 
   const { mutate: update, isPending: isUpdating } = useMutation({
-    mutationFn: () => updateNews(numId, { news_title: form.news_title, news_description: form.news_description, file_keys: [fileKey] }),
+    mutationFn: () => updateNews(numId, {
+      news_title: form.news_title,
+      news_description: form.news_description,
+      file_keys: [fileKey],
+    }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['news'] });
       router.push('/admin/news');
@@ -58,18 +62,18 @@ export default function EditNewsPage({ params }: EditNewsPageProps) {
 
   const applyFile = async (file: File) => {
     if (!file.type.startsWith('image/')) return;
-    setImagePreview(URL.createObjectURL(file));
+    setUploadedPreview(URL.createObjectURL(file));
     setIsUploading(true);
     try {
       const result = await uploadFile(file);
-      setFileKey(result.fileKey);
+      setNewFileKey(result.fileKey);
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setEdits((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,11 +97,6 @@ export default function EditNewsPage({ params }: EditNewsPageProps) {
     if (file) applyFile(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    update();
-  };
-
   const handleDelete = () => {
     if (confirm('새소식을 삭제하시겠습니까?')) remove();
   };
@@ -106,7 +105,7 @@ export default function EditNewsPage({ params }: EditNewsPageProps) {
     <>
       <AdminSubHeader imageSrc={chinchilla} title="TOY VILLAGE" subtitle="새소식 수정" />
       <main className="w-full px-20 py-12">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => { e.preventDefault(); update(); }}>
           <div className="flex gap-8">
             <div
               className={`group relative w-[50%] shrink-0 rounded-2xl overflow-hidden cursor-pointer bg-[#E5E5E5] transition-colors ${isDragging ? 'bg-[#d0d0d0] ring-2 ring-main-forest-green' : ''}`}

@@ -111,13 +111,6 @@ export default function Header() {
             </>
           )}
         </nav>
-
-        <Link
-          href={config.buttonHref}
-          className="ml-auto shrink-0 rounded-4xl bg-[#3A7A3A] px-7 py-3 text-body-2 text-white transition-colors hover:bg-[#2D6A2D]"
-        >
-          {config.buttonText}
-        </Link>
       </div>
     </header>
   );

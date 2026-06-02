@@ -1,7 +1,7 @@
 'use client';
 
-import { use, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
@@ -9,12 +9,8 @@ import capybara from '@/assets/animals/Capybara.png';
 import { deletePopup, getPopupById, PopupRequest, updatePopup } from '@/lib/api/popup';
 import { IMAGE_BASE_URL, uploadFile } from '@/lib/api/file';
 
-interface EditPopupPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default function EditPopupPage({ params }: EditPopupPageProps) {
-  const { id } = use(params);
+export default function EditPopupPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();

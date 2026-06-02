@@ -1,18 +1,14 @@
 'use client';
 
-import { use, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { deleteFaq, FaqItem, FaqRequest, getFaqById, updateFaq } from '@/lib/api/faq';
 
-interface FaqDetailPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default function FaqDetailPage({ params }: FaqDetailPageProps) {
-  const { id } = use(params);
+export default function FaqDetailPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();

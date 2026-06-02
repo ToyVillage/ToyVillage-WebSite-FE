@@ -1,20 +1,16 @@
 'use client';
 
-import { use, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
-import { deleteGallery, GalleryItem, getGalleryById, updateGallery } from '@/lib/api/gallery';
+import { deleteGallery, getGalleryById, updateGallery } from '@/lib/api/gallery';
 import { IMAGE_BASE_URL, uploadFile } from '@/lib/api/file';
 
-interface EditGalleryPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default function EditGalleryPage({ params }: EditGalleryPageProps) {
-  const { id } = use(params);
+export default function EditGalleryPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -29,8 +25,6 @@ export default function EditGalleryPage({ params }: EditGalleryPageProps) {
   const { data } = useQuery({
     queryKey: ['gallery', numId],
     queryFn: () => getGalleryById(numId),
-    initialData: () =>
-      queryClient.getQueryData<GalleryItem[]>(['gallery'])?.find((g) => g.gallery_id === numId),
   });
 
   const title = titleEdit ?? data?.gallery_title ?? '';

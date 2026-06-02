@@ -11,7 +11,8 @@
       "Bash(gh issue create --title 'feat: 팝업 유저뷰 — 홈 자동 모달' --body ' *)",
       "PowerShell(npx tsc --noEmit 2>&1)",
       "Bash(git checkout *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(xargs cat)"
     ],
     "additionalDirectories": [
       "c:\\Users\\user\\toy-village\\src\\lib\\api",

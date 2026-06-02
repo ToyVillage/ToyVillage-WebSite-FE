@@ -1,15 +1,10 @@
 'use client';
 
-import { use } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { getPartnershipById } from '@/lib/api/partnership';
-
-interface PartnershipDetailPageProps {
-  params: Promise<{ id: string }>;
-}
 
 const PARTNERSHIP_TYPE_LABELS: Record<string, string> = {
   MARKETING: '마케팅',
@@ -26,8 +21,8 @@ function DetailRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-export default function PartnershipDetailPage({ params }: PartnershipDetailPageProps) {
-  const { id } = use(params);
+export default function PartnershipDetailPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
 

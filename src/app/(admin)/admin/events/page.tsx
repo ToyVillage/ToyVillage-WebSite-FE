@@ -14,7 +14,7 @@ export default function AdminEventsPage() {
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ['events', currentPage],
+    queryKey: ['events', 'list', currentPage],
     queryFn: () => getEvents(currentPage - 1),
   });
 

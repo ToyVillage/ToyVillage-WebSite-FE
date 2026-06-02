@@ -1,20 +1,15 @@
 'use client';
 
-import { use } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import SubHeader from '@/components/layout/SubHeader';
 import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { getEventById } from '@/lib/api/events';
 import { IMAGE_BASE_URL } from '@/lib/api/file';
 
-interface EventsDetailPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default function EventsDetailPage({ params }: EventsDetailPageProps) {
-  const { id } = use(params);
+export default function EventsDetailPage() {
+  const { id } = useParams() as { id: string };
   const router = useRouter();
 
   const { data: event } = useQuery({

@@ -1,7 +1,7 @@
 'use client';
 
-import { use, useEffect, useRef, useState, type ChangeEvent, type DragEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef, useState, type ChangeEvent, type DragEvent } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
@@ -9,26 +9,24 @@ import chinchilla from '@/assets/animals/Chinchilla.jpeg';
 import { deleteEvent, getEventById, updateEvent } from '@/lib/api/events';
 import { uploadFile, IMAGE_BASE_URL } from '@/lib/api/file';
 
-interface EditEventPageProps {
-  params: Promise<{ id: string }>;
-}
+type FormEdits = {
+  event_name?: string;
+  event_description?: string;
+  event_start_date?: string;
+  event_end_date?: string;
+  event_subjects?: string;
+};
 
-export default function EditEventPage({ params }: EditEventPageProps) {
-  const { id } = use(params);
+export default function EditEventPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [form, setForm] = useState({
-    event_name: '',
-    event_description: '',
-    event_start_date: '',
-    event_end_date: '',
-    event_subjects: '',
-  });
-  const [fileKey, setFileKey] = useState('');
-  const [imagePreview, setImagePreview] = useState('');
+  const [edits, setEdits] = useState<FormEdits>({});
+  const [newFileKey, setNewFileKey] = useState('');
+  const [uploadedPreview, setUploadedPreview] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -37,20 +35,15 @@ export default function EditEventPage({ params }: EditEventPageProps) {
     queryFn: () => getEventById(numId),
   });
 
-  useEffect(() => {
-    if (data) {
-      setForm({
-        event_name: data.eventName,
-        event_description: data.eventDescription,
-        event_start_date: data.eventStartDate?.slice(0, 10) ?? '',
-        event_end_date: data.eventEndDate?.slice(0, 10) ?? '',
-        event_subjects: data.eventSubjects,
-      });
-      const key = data.fileKey ?? '';
-      setFileKey(key);
-      setImagePreview(key ? IMAGE_BASE_URL + key : '');
-    }
-  }, [data]);
+  const form = {
+    event_name: edits.event_name ?? data?.eventName ?? '',
+    event_description: edits.event_description ?? data?.eventDescription ?? '',
+    event_start_date: edits.event_start_date ?? data?.eventStartDate?.slice(0, 10) ?? '',
+    event_end_date: edits.event_end_date ?? data?.eventEndDate?.slice(0, 10) ?? '',
+    event_subjects: edits.event_subjects ?? data?.eventSubjects ?? '',
+  };
+  const fileKey = newFileKey || data?.fileKey || '';
+  const imagePreview = uploadedPreview || (fileKey ? IMAGE_BASE_URL + fileKey : '');
 
   const { mutate: update, isPending: isUpdating } = useMutation({
     mutationFn: () => updateEvent(numId, {
@@ -75,18 +68,18 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
   const applyFile = async (file: File) => {
     if (!file.type.startsWith('image/')) return;
-    setImagePreview(URL.createObjectURL(file));
+    setUploadedPreview(URL.createObjectURL(file));
     setIsUploading(true);
     try {
       const result = await uploadFile(file);
-      setFileKey(result.fileKey);
+      setNewFileKey(result.fileKey);
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setEdits((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
