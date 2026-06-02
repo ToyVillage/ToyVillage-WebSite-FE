@@ -1,4 +1,4 @@
-  'use client';
+'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +13,7 @@ export default function AdminGalleryPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: ['gallery', currentPage],
+    queryKey: ['gallery', 'list', currentPage],
     queryFn: () => getGalleries(currentPage - 1),
   });
 

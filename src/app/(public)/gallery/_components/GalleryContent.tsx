@@ -12,7 +12,7 @@ export function GalleryContent() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: ['gallery', currentPage],
+    queryKey: ['gallery', 'list', currentPage],
     queryFn: () => getGalleries(currentPage - 1),
   });
 

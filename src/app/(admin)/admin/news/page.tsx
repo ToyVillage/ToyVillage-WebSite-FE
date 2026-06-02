@@ -14,7 +14,7 @@ export default function AdminNewsPage() {
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ['news', currentPage],
+    queryKey: ['news', 'list', currentPage],
     queryFn: () => getNewsList(currentPage - 1, 100),
   });
 

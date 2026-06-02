@@ -12,7 +12,7 @@ export function NewsContent() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: ['news', currentPage],
+    queryKey: ['news', 'list', currentPage],
     queryFn: () => getNewsList(currentPage - 1, 100),
   });
 

@@ -1,16 +1,12 @@
 'use client';
 
-import { use, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import AdminSubHeader from '@/components/layout/AdminSubHeader';
 import capybara from '@/assets/animals/Capybara.png';
 import { deleteAnimal, getAnimalById, updateAnimal } from '@/lib/api/animals';
-
-interface EditAnimalPageProps {
-  params: Promise<{ id: string }>;
-}
 
 const ANIMAL_TYPES = [
   { value: 'MAMMALS', label: '포유류' },
@@ -19,8 +15,8 @@ const ANIMAL_TYPES = [
   { value: 'BIRDS', label: '조류' },
 ];
 
-export default function EditAnimalPage({ params }: EditAnimalPageProps) {
-  const { id } = use(params);
+export default function EditAnimalPage() {
+  const { id } = useParams() as { id: string };
   const numId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();

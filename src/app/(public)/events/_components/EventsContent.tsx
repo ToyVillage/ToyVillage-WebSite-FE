@@ -12,7 +12,7 @@ export function EventsContent() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: ['events', currentPage],
+    queryKey: ['events', 'list', currentPage],
     queryFn: () => getEvents(currentPage - 1),
   });
 
