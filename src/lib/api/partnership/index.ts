@@ -13,6 +13,7 @@ export interface PartnershipRequest {
   email: string;
   phoneNumber: string;
   content: string;
+  file_keys?: string[];
 }
 
 export interface PartnershipDetail {

@@ -10,8 +10,8 @@ import { type ApiErrorResponse } from '@/lib/api/auth/response';
 const formFields = [
   {
     key: 'email',
-    label: '아이디',
-    placeholder: '아이디 입력',
+    label: '이메일',
+    placeholder: '이메일 입력',
     type: 'text',
     autoComplete: 'email',
   },
