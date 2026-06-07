@@ -12,7 +12,8 @@
       "PowerShell(npx tsc --noEmit 2>&1)",
       "Bash(git checkout *)",
       "Bash(npm run *)",
-      "Bash(xargs cat)"
+      "Bash(xargs cat)",
+      "Bash(xargs ls)"
     ],
     "additionalDirectories": [
       "c:\\Users\\user\\toy-village\\src\\lib\\api",
