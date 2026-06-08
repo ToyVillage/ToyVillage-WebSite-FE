@@ -106,7 +106,7 @@ export function PartnershipContent() {
     return (
       <>
         <SubHeader imageSrc={chinchilla} title="제휴 문의" subtitle="Partnership" />
-        <main className="w-full px-22 py-16 flex flex-col items-center gap-4">
+        <main className="w-full px-4 py-8 md:px-22 md:py-16 flex flex-col items-center gap-4">
           <p className="text-subtitle-1 font-bold text-black">문의가 접수되었습니다.</p>
           <p className="text-body-3 text-gray-500">빠른 시일 내에 연락드리겠습니다.</p>
         </main>
@@ -117,7 +117,7 @@ export function PartnershipContent() {
   return (
     <>
       <SubHeader imageSrc={chinchilla} title="제휴 문의" subtitle="Partnership" />
-      <main className="w-full px-22 py-16 mx-auto">
+      <main className="w-full px-4 py-8 md:px-22 md:py-16 mx-auto">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <label className="text-body-2 text-black">원하시는 유형을 선택해주세요</label>
@@ -169,7 +169,7 @@ export function PartnershipContent() {
             <label className="text-body-2 text-black">파일 첨부 <span className="text-body-3 text-gray-400">(선택)</span></label>
 
             <div
-              className={`w-full border-2 border-dashed rounded-lg px-6 py-10 flex flex-col items-center gap-3 cursor-pointer transition-colors ${isDragging ? 'border-main-forest-green bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
+              className={`w-full border-2 border-dashed rounded-lg px-4 py-6 md:px-6 md:py-10 flex flex-col items-center gap-3 cursor-pointer transition-colors ${isDragging ? 'border-main-forest-green bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
               onClick={() => fileInputRef.current?.click()}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}

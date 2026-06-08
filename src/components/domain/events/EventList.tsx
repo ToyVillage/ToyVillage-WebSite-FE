@@ -27,7 +27,7 @@ function formatEventDate(iso: string) {
 
 export function EventList({ items }: EventListProps) {
   return (
-    <ul className="grid grid-cols-3 gap-7">
+    <ul className="grid grid-cols-1 md:grid-cols-3 gap-7">
       {items.map((item) => {
         const imageUrl = item.fileKey ? IMAGE_BASE_URL + item.fileKey : null;
         return (

@@ -38,7 +38,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         imageSrc={chinchilla}
         imageAlt={news.title}
       />
-      <section className="px-20 py-20">
+      <section className="px-4 py-8 md:px-20 md:py-20">
         {imageUrl && (
           <div className="relative w-full h-109.75 rounded-2xl overflow-hidden mb-8">
             <Image src={imageUrl} alt={news.title} fill className="object-cover" unoptimized />

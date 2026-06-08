@@ -22,6 +22,7 @@ const NAV_ITEMS = [
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isAdminPage = pathname.startsWith('/admin');
 
@@ -38,45 +39,101 @@ export default function Header() {
     buttonHref: isAdminPage ? '/' : '/login',
   };
 
-  return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 z-50 flex h-[100px] w-full items-center transition-all duration-200',
-        !isScrolled ? 'bg-transparent text-white' : 'bg-white text-black shadow-md',
-      )}
-    >
-      <div className="mx-auto flex w-full max-w-[1400px] items-center px-6">
-        <Link href={config.logoHref} className="shrink-0">
-          <Logo className="h-[100px] w-[237px]" />
-        </Link>
+  const linkClass = (active: boolean) =>
+    cn('px-5 py-2 text-body-2 relative', active ? 'font-bold border-b-2 border-current' : 'opacity-70 hover:opacity-100');
 
-        <nav className="ml-[80px] flex h-[80px] items-center gap-2">
-          {!isAdminPage && (
-            <Link
-              key="/"
-              href="/"
+  const closeMobile = () => setMobileOpen(false);
+
+  return (
+    <>
+      <header
+        className={cn(
+          'fixed top-0 left-0 z-50 flex h-25 w-full items-center transition-all duration-200',
+          !isScrolled && !mobileOpen ? 'bg-transparent text-white' : 'bg-white text-black shadow-md',
+        )}
+      >
+        <div className="mx-auto flex w-full max-w-350 items-center justify-between px-6">
+          <Link href={config.logoHref} className="shrink-0">
+            <Logo className="w-35 h-auto md:w-59.25" />
+          </Link>
+
+          {/* 데스크탑 nav */}
+          <nav className="ml-20 hidden md:flex h-20 items-center gap-2">
+            {!isAdminPage && (
+              <Link href="/" className={linkClass(pathname === '/')}>
+                소개
+              </Link>
+            )}
+            {NAV_ITEMS.map((item) => {
+              const finalHref = isAdminPage ? `/admin${item.href}` : item.href;
+              const isActive = pathname === finalHref || pathname.startsWith(`${finalHref}/`);
+              return (
+                <Link key={item.href} href={finalHref} className={linkClass(isActive)}>
+                  {item.name}
+                </Link>
+              );
+            })}
+            {isAdminPage && (
+              <>
+                <Link href="/admin/popup" className={linkClass(pathname.startsWith('/admin/popup'))}>
+                  팝업관리
+                </Link>
+                <Link href="/admin/faq" className={linkClass(pathname.startsWith('/admin/faq'))}>
+                  자주묻는 질문
+                </Link>
+              </>
+            )}
+          </nav>
+
+          {/* 햄버거 버튼 (모바일 전용) */}
+          <button
+            className="md:hidden flex flex-col justify-center gap-1.5 p-2"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
+          >
+            <span
               className={cn(
-                'px-5 py-2 text-body-2  relative',
-                pathname == ('/')
-                  ? 'font-bold border-b-2 border-current'
-                  : 'opacity-70 hover:opacity-100',
+                'block w-6 h-0.5 bg-current transition-all duration-300 origin-center',
+                mobileOpen && 'rotate-45 translate-y-2',
               )}
-            >
+            />
+            <span
+              className={cn(
+                'block w-6 h-0.5 bg-current transition-all duration-300',
+                mobileOpen && 'opacity-0',
+              )}
+            />
+            <span
+              className={cn(
+                'block w-6 h-0.5 bg-current transition-all duration-300 origin-center',
+                mobileOpen && '-rotate-45 -translate-y-2',
+              )}
+            />
+          </button>
+        </div>
+      </header>
+
+      {/* 모바일 메뉴 오버레이 */}
+      <div
+        className={cn(
+          'fixed inset-0 z-40 bg-white md:hidden transition-opacity duration-300',
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+        )}
+      >
+        <nav className="flex flex-col pt-25 px-8">
+          {!isAdminPage && (
+            <Link href="/" onClick={closeMobile} className="py-4 text-xl border-b border-gray-100 font-medium text-black">
               소개
             </Link>
           )}
           {NAV_ITEMS.map((item) => {
             const finalHref = isAdminPage ? `/admin${item.href}` : item.href;
-            const isActive = pathname === finalHref || pathname.startsWith(`${finalHref}/`);
-
             return (
               <Link
                 key={item.href}
                 href={finalHref}
-                className={cn(
-                  'px-5 py-2 text-body-2  relative',
-                  isActive ? 'font-bold border-b-2 border-current' : 'opacity-70 hover:opacity-100',
-                )}
+                onClick={closeMobile}
+                className="py-4 text-xl border-b border-gray-100 font-medium text-black"
               >
                 {item.name}
               </Link>
@@ -84,34 +141,16 @@ export default function Header() {
           })}
           {isAdminPage && (
             <>
-            <Link
-              key="/popup"
-              href="/admin/popup"
-              className={cn(
-                'px-5 py-2 text-body-2  relative',
-                pathname.startsWith('/admin/popup')
-                  ? 'font-bold border-b-2 border-current'
-                  : 'opacity-70 hover:opacity-100',
-              )}
-            >
-              팝업관리
-            </Link>
-            <Link
-              key="/faq"
-              href="/admin/faq"
-              className={cn(
-                'px-5 py-2 text-body-2  relative',
-                pathname.startsWith('/admin/faq')
-                  ? 'font-bold border-b-2 border-current'
-                  : 'opacity-70 hover:opacity-100',
-              )}
-            >
-              자주묻는 질문
-            </Link>
+              <Link href="/admin/popup" onClick={closeMobile} className="py-4 text-xl border-b border-gray-100 font-medium text-black">
+                팝업관리
+              </Link>
+              <Link href="/admin/faq" onClick={closeMobile} className="py-4 text-xl border-b border-gray-100 font-medium text-black">
+                자주묻는 질문
+              </Link>
             </>
           )}
         </nav>
       </div>
-    </header>
+    </>
   );
 }

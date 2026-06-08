@@ -4,8 +4,6 @@ interface LogoProps {
 
 export const Logo = ({ className }: LogoProps) => (
   <svg
-    width="235"
-    height="34"
     viewBox="0 0 235 34"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

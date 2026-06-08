@@ -19,7 +19,7 @@ export function NewsContent() {
   return (
     <>
       <SubHeader imageSrc={chinchilla} title="새소식" subtitle="Toy village News" />
-      <main className="w-full px-20 py-12">
+      <main className="w-full px-4 py-8 md:px-20 md:py-12">
         <NewsCardGrid items={data?.content ?? []} />
         <Pagination
           currentPage={currentPage}
