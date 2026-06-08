@@ -25,7 +25,7 @@ export default function GalleryCardGrid({ items, isAdmin = false }: GalleryCardG
   });
 
   return (
-    <ul className="grid grid-cols-4 gap-5 items-start">
+    <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 items-start">
       {items.map((item) => (
         <li key={item.gallery_id} className="flex flex-col gap-3">
           <div className="relative w-full aspect-square rounded-2xl overflow-hidden">

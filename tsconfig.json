@@ -44,7 +44,7 @@
     ".next/types/**/*.ts",
     "**/*.mts",
     ".next/dev/types/**/*.ts"
-, "tailwind.config.js", ".vscode/middleware.ts"  ],
+, "tailwind.config.js", ".vscode/middleware.ts", "src/app/(admin)/admin/partnership/[id]/ㅁ.jsx"  ],
   "exclude": [
     "node_modules"
   ]

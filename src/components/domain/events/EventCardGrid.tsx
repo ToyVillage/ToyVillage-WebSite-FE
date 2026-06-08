@@ -28,7 +28,7 @@ function formatEventDate(iso: string) {
 
 export default function EventCardGrid({ items, isAdmin = false, onDelete }: EventCardGridProps) {
   return (
-    <ul className="grid grid-cols-3 gap-7">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
       {items.map((item) => {
         const imageUrl = item.fileKey ? IMAGE_BASE_URL + item.fileKey : null;
         return (

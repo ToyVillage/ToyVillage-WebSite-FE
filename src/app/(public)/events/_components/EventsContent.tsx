@@ -19,7 +19,7 @@ export function EventsContent() {
   return (
     <>
       <SubHeader imageSrc={chinchilla} title="이벤트" subtitle="Toy village's Event" />
-      <main className="w-full px-20 py-12">
+      <main className="w-full px-4 py-8 md:px-20 md:py-12">
         <EventCardGrid items={data?.content ?? []} />
         <Pagination
           currentPage={currentPage}
