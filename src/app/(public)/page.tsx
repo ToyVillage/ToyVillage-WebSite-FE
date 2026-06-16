@@ -49,7 +49,7 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="relative w-full aspect-video md:aspect-auto md:h-195.5 overflow-hidden">
+      <section className="relative w-full h-[50vh] md:h-195.5 overflow-hidden">
         <Image
           src={Capybara}
           alt="카피바라 가족이 물가에 모여있는 모습"

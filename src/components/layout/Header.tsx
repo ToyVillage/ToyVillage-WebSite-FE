@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Logo } from '@/assets/Logo';
+import logoPng from '@/assets/logo.png';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,17 +23,9 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const isAdminPage = pathname.startsWith('/admin');
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const config = {
     logoHref: isAdminPage ? '/admin' : '/',
@@ -51,13 +45,14 @@ export default function Header() {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 z-50 flex h-25 w-full items-center transition-all duration-200 text-black',
-          isScrolled || mobileOpen ? 'bg-white shadow-md' : 'bg-transparent',
+          'fixed top-0 left-0 z-50 flex h-25 w-full items-center transition-all duration-200 text-black bg-white shadow-md ',
+
         )}
       >
         <div className="mx-auto flex w-full max-w-350 items-center px-6">
-          <Link href={config.logoHref} className="shrink-0">
-            <Logo className="w-35 h-auto md:w-59.25" />
+          <Link href={config.logoHref} className="shrink-0 flex items-center gap-2">
+            <Image src={logoPng} alt="토이빌리지 엠블럼" className="h-10 w-auto md:h-12" />
+            <Logo className="w-28 h-auto md:w-40" />
           </Link>
 
           {/* 데스크탑 nav */}
