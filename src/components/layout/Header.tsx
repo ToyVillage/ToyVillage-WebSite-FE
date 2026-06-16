@@ -40,7 +40,10 @@ export default function Header() {
   };
 
   const linkClass = (active: boolean) =>
-    cn('px-5 py-2 text-body-2 relative', active ? 'font-bold border-b-2 border-current' : 'opacity-70 hover:opacity-100');
+    cn(
+      'px-5 py-2 text-body-2 relative transition-colors',
+      active ? 'font-bold border-b-2 border-current' : 'font-bold text-gray-400 hover:text-gray-600',
+    );
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -48,17 +51,17 @@ export default function Header() {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 z-50 flex h-25 w-full items-center transition-all duration-200',
-          !isScrolled && !mobileOpen ? 'bg-transparent text-white' : 'bg-white text-black shadow-md',
+          'fixed top-0 left-0 z-50 flex h-25 w-full items-center transition-all duration-200 text-black',
+          isScrolled || mobileOpen ? 'bg-white shadow-md' : 'bg-transparent',
         )}
       >
-        <div className="mx-auto flex w-full max-w-350 items-center justify-between px-6">
+        <div className="mx-auto flex w-full max-w-350 items-center px-6">
           <Link href={config.logoHref} className="shrink-0">
             <Logo className="w-35 h-auto md:w-59.25" />
           </Link>
 
           {/* 데스크탑 nav */}
-          <nav className="ml-20 hidden md:flex h-20 items-center gap-2">
+          <nav className="flex-1 hidden md:flex justify-center h-20 items-center gap-2">
             {!isAdminPage && (
               <Link href="/" className={linkClass(pathname === '/')}>
                 소개
@@ -87,7 +90,7 @@ export default function Header() {
 
           {/* 햄버거 버튼 (모바일 전용) */}
           <button
-            className="md:hidden flex flex-col justify-center gap-1.5 p-2"
+            className="md:hidden ml-auto flex flex-col justify-center gap-1.5 p-2"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
           >
