@@ -20,7 +20,7 @@ function SliderRow({ images, direction }: SliderRowProps) {
         {duplicated.map((url, i) => (
           <div key={i} className="w-55 h-55 shrink-0 overflow-hidden rounded-xl mr-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={url} alt="" className="w-full h-full object-cover" />
+            <img src={url} alt="" loading="lazy" className="w-full h-full object-cover" />
           </div>
         ))}
       </div>

@@ -28,7 +28,7 @@ export default function NewsCardGrid({ items, isAdmin = false, onDelete }: NewsC
           <li key={item.id} className="flex flex-col">
             <div className="relative w-full h-55 rounded-xl overflow-hidden mb-3">
               {imageUrl ? (
-                <Image src={imageUrl} alt={item.title} fill className="object-cover" unoptimized />
+                <Image src={imageUrl} alt={item.title} fill className="object-cover" />
               ) : (
                 <div className="w-full h-full bg-gray-200" />
               )}
