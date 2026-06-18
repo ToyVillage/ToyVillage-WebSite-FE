@@ -1,5 +1,4 @@
-export const dynamic = 'force-dynamic';
-
+import { unstable_cache } from 'next/cache';
 import Image from 'next/image';
 import Link from 'next/link';
 import Capybara from '@/assets/animals/banner.png';
@@ -13,12 +12,17 @@ import { getGalleries } from '@/lib/api/gallery';
 import { getAnimals } from '@/lib/api/animals';
 import { IMAGE_BASE_URL } from '@/lib/api/file';
 
+const getCachedNewsList = unstable_cache(() => getNewsList(0, 5), ['home-news'], { revalidate: 60 });
+const getCachedEvents = unstable_cache(() => getEvents(0, 3), ['home-events'], { revalidate: 60 });
+const getCachedGalleries = unstable_cache(() => getGalleries(0), ['home-galleries'], { revalidate: 60 });
+const getCachedAnimals = unstable_cache(() => getAnimals(), ['home-animals'], { revalidate: 60 });
+
 export default async function Home() {
   const [newsResult, eventsResult, galleriesResult, animalsResult] = await Promise.allSettled([
-    getNewsList(0, 5),
-    getEvents(0, 3),
-    getGalleries(0),
-    getAnimals(),
+    getCachedNewsList(),
+    getCachedEvents(),
+    getCachedGalleries(),
+    getCachedAnimals(),
   ]);
 
   const newsItems = newsResult.status === 'fulfilled' ? newsResult.value.content.slice(0, 5) : [];
@@ -71,6 +75,7 @@ export default async function Home() {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg md:text-title-3 font-bold flex items-center gap-2">
             <span className="text-main-forest-green">토이빌리지</span> 새소식
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={Sprout.src} alt="" aria-hidden="true" />
           </h2>
           <Link href="/news" className="text-body-3 text-gray-400 hover:text-black shrink-0">
@@ -82,6 +87,7 @@ export default async function Home() {
         <div className="flex justify-between items-center mt-16 md:mt-31.5 mb-6">
           <h2 className="text-lg md:text-title-3 font-bold flex items-center gap-2">
             <span className="text-main-forest-green">토이빌리지</span> 이벤트
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={Sprout.src} alt="" aria-hidden="true" />
           </h2>
           <Link href="/events" className="text-body-3 text-gray-400 hover:text-black shrink-0">

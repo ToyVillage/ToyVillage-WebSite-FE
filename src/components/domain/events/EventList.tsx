@@ -34,7 +34,7 @@ export function EventList({ items }: EventListProps) {
           <li key={item.eventId} className="flex flex-col">
             <div className="relative w-full h-55 rounded-xl overflow-hidden mb-2">
               {imageUrl != null ? (
-                <Image src={imageUrl} alt={item.eventName ?? ''} fill className="object-cover" unoptimized />
+                <Image src={imageUrl} alt={item.eventName ?? ''} fill className="object-cover" />
               ) : (
                 <div className="w-full h-full bg-gray-200" />
               )}

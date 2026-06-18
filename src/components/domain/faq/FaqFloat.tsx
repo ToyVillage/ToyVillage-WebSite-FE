@@ -24,7 +24,7 @@ export function FaqFloat() {
             <span className="text-white font-semibold text-body-3">자주 묻는 질문</span>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-gray-400 hover:text-white transition"
+              className="text-gray-400 hover:text-white transition cursor-pointer"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12" />
@@ -36,7 +36,7 @@ export function FaqFloat() {
               <div key={faq.question_id}>
                 <button
                   onClick={() => toggle(faq.question_id)}
-                  className="w-full flex items-center justify-between px-5 py-4 text-left bg-white transition"
+                  className="w-full flex items-center justify-between px-5 py-4 text-left bg-white transition cursor-pointer"
                 >
                   <span className="text-body-3 text-black pr-4">{faq.question_content}</span>
                   <svg
@@ -63,7 +63,7 @@ export function FaqFloat() {
       )}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-16 h-16 rounded-full bg-[#1E1E1E] text-white text-body-3 font-semibold shadow-lg hover:bg-[#333] transition-colors flex items-center justify-center"
+        className="w-16 h-16 rounded-full bg-[#1E1E1E] text-white text-body-3 font-semibold shadow-lg hover:bg-[#333] transition-colors flex items-center justify-center cursor-pointer"
       >
         FAQ
       </button>
