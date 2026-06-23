@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     siteName: "Toy Village",
     locale: "ko_KR",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "토이 빌리지",
+      },
+    ],
   },
 };
 

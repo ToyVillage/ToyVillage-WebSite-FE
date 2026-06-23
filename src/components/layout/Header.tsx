@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import logoPng from '@/assets/logo1.png';
+import logoPng from '@/assets/logo.png';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
