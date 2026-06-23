@@ -55,7 +55,7 @@ export default function Header() {
       >
         <div className="mx-auto flex w-full max-w-350 items-center px-4 md:px-20">
           <Link href={config.logoHref} className="shrink-0 flex items-center gap-2">
-            <Image src={logoPng} alt="토이빌리지 엠블럼" className="h-10 w-auto md:h-12" />
+            <Image src={logoPng} alt="토이빌리지 엠블럼" className="h-14 w-auto md:h-16" />
           </Link>
 
           {/* 데스크탑 nav */}

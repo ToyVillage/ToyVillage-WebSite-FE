@@ -11,10 +11,15 @@ import { getEvents } from '@/lib/api/events';
 import { getGalleries } from '@/lib/api/gallery';
 import { getAnimals } from '@/lib/api/animals';
 import { IMAGE_BASE_URL } from '@/lib/api/file';
+import logoPng from '@/assets/logo.png';
 
-const getCachedNewsList = unstable_cache(() => getNewsList(0, 5), ['home-news'], { revalidate: 60 });
+const getCachedNewsList = unstable_cache(() => getNewsList(0, 5), ['home-news'], {
+  revalidate: 60,
+});
 const getCachedEvents = unstable_cache(() => getEvents(0, 3), ['home-events'], { revalidate: 60 });
-const getCachedGalleries = unstable_cache(() => getGalleries(0), ['home-galleries'], { revalidate: 60 });
+const getCachedGalleries = unstable_cache(() => getGalleries(0), ['home-galleries'], {
+  revalidate: 60,
+});
 const getCachedAnimals = unstable_cache(() => getAnimals(), ['home-animals'], { revalidate: 60 });
 
 export default async function Home() {
@@ -103,7 +108,7 @@ export default async function Home() {
         <div className="flex flex-col items-center">
           <p className="text-lg md:text-title-3 text-black">가까이서 만나고,</p>
           <p className="text-lg md:text-title-3 text-black">직접 체험하며 즐기는</p>
-          <p className="text-2xl md:text-title-1 font-bold text-black">Toy Village</p>
+          <Image src={logoPng} alt="토이빌리지 로고" className="h-20 w-auto mb-2 md:h-30" />
         </div>
         <AnimalSliderSection row1={sliderRow1} row2={sliderRow2} />
       </section>

@@ -13,7 +13,10 @@
       "Bash(git checkout *)",
       "Bash(npm run *)",
       "Bash(xargs cat)",
-      "Bash(xargs ls)"
+      "Bash(xargs ls)",
+      "Bash(md5 /Users/kimjihwan/Desktop/ToyVillage-WebSite-FE/src/assets/image.png /Users/kimjihwan/Desktop/ToyVillage-WebSite-FE/public/og-image.png)",
+      "Bash(cat ~/.claude/settings.json 2>/dev/null || echo \"없음\")",
+      "Read(//Users/kimjihwan/.claude/**)"
     ],
     "additionalDirectories": [
       "c:\\Users\\user\\toy-village\\src\\lib\\api",

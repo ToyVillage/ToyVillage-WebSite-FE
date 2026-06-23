@@ -1,4 +1,5 @@
-import { Logo } from '@/assets/Logo';
+import Image from 'next/image';
+import logoPng from '@/assets/logo.png';
 import Fence from '@/assets/Fence.svg';
 
 export default function Footer() {
@@ -13,11 +14,11 @@ export default function Footer() {
       >
         <div className="max-w-300 mt-1.25">
           <div className="mb-6">
-            <Logo className="text-white w-35 md:w-[180] h-auto mb-2" />
-            <p className="text-body-3 text-main-light-green">교감하며 즐기는 테마파크</p>
+            <Image src={logoPng} alt="토이빌리지 로고" className="h-14 w-auto mb-2" />
+            <p className="text-body-3 text-main-light-green ml-1.5">교감하며 즐기는 테마파크</p>
           </div>
 
-          <address className="not-italic flex flex-col md:flex-row md:justify-between md:items-end gap-4 md:gap-6">
+          <address className="ml-1.5 not-italic flex flex-col md:flex-row md:justify-between md:items-end gap-4 md:gap-6">
             <div className="flex flex-wrap gap-x-4 gap-y-1">
               <span className="text-body-3 text-main-light-green">상호 : 주식회사 토이빌리지</span>
               <span className="text-body-3 text-main-light-green hidden md:inline" aria-hidden="true">
