@@ -26,6 +26,14 @@ function formatEventDate(iso: string) {
 }
 
 export function EventList({ items }: EventListProps) {
+  if (items.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-10 text-gray-400 text-body-3">
+        등록된 이벤트가 없습니다.
+      </div>
+    );
+  }
+
   return (
     <ul className="grid grid-cols-1 md:grid-cols-3 gap-7">
       {items.map((item) => {

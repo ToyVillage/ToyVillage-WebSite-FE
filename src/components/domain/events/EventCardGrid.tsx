@@ -27,6 +27,14 @@ function formatEventDate(iso: string) {
 }
 
 export default function EventCardGrid({ items, isAdmin = false, onDelete }: EventCardGridProps) {
+  if (items.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-20 text-gray-400 text-body-3">
+        등록된 이벤트가 없습니다.
+      </div>
+    );
+  }
+
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
       {items.map((item) => {

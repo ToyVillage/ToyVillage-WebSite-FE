@@ -24,6 +24,14 @@ export default function GalleryCardGrid({ items, isAdmin = false }: GalleryCardG
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['gallery'] }),
   });
 
+  if (items.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-20 text-gray-400 text-body-3">
+        등록된 갤러리가 없습니다.
+      </div>
+    );
+  }
+
   return (
     <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 items-start">
       {items.map((item) => (

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SubHeader from '@/components/layout/SubHeader';
-import chinchilla from '@/assets/animals/Chinchilla.jpeg';
+import banner from '@/assets/animals/banner.png';
 import EventCardGrid from '@/components/domain/events/EventCardGrid';
 import Pagination from '@/components/common/Pagination';
 import { getEvents } from '@/lib/api/events';
@@ -18,7 +18,7 @@ export function EventsContent() {
 
   return (
     <>
-      <SubHeader imageSrc={chinchilla} title="이벤트" subtitle="Toy village's Event" />
+      <SubHeader imageSrc={banner} title="이벤트" subtitle="Toy village's Event" />
       <main className="w-full px-4 py-8 md:px-20 md:py-12">
         <EventCardGrid items={data?.content ?? []} />
         <Pagination

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import chinchilla from '@/assets/animals/Chinchilla.jpeg';
+import banner from '@/assets/animals/banner.png';
 import SubHeader from '@/components/layout/SubHeader';
 import { getAnimals, AnimalItem } from '@/lib/api/animals';
 
@@ -53,9 +53,20 @@ export function AnimalsContent() {
 
   const closeDrawer = () => setDrawerOpen(false);
 
+  if (visibleGroups.length === 0) {
+    return (
+      <>
+        <SubHeader imageSrc={banner} title="동물 소개" subtitle="Toy village's Animals" />
+        <div className="flex items-center justify-center py-20 text-gray-400 text-body-3">
+          등록된 동물이 없습니다.
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <SubHeader imageSrc={chinchilla} title="동물 소개" />
+      <SubHeader imageSrc={banner} title="동물 소개" subtitle="Toy village's Animals" />
 
       {/* 모바일 드로어 오버레이 */}
       <div

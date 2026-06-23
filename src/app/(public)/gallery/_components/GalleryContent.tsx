@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SubHeader from '@/components/layout/SubHeader';
-import chinchilla from '@/assets/animals/Chinchilla.jpeg';
+import banner from '@/assets/animals/banner.png';
 import GalleryCardGrid from '@/components/domain/gallery/GalleryCardGrid';
 import Pagination from '@/components/common/Pagination';
 import { getGalleries } from '@/lib/api/gallery';
@@ -18,7 +18,7 @@ export function GalleryContent() {
 
   return (
     <>
-      <SubHeader imageSrc={chinchilla} title="갤러리" subtitle="Gallery of Toy village" />
+      <SubHeader imageSrc={banner} title="갤러리" subtitle="Gallery of Toy village" />
       <main className="w-full px-4 py-8 md:px-20 md:py-12">
         <GalleryCardGrid items={data?.content ?? []} />
         <Pagination
