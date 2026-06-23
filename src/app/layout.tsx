@@ -15,6 +15,7 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toyvillage.vercel.app"),
   title: {
     default: "토이 빌리지 (Toy Village)",
     template: "%s | 토이 빌리지",
