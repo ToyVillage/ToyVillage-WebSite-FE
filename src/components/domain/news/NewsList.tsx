@@ -17,6 +17,14 @@ interface NoticeListProps {
 }
 
 export function NewsList({ items }: NoticeListProps) {
+  if (items.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-10 text-gray-400 text-body-3 border border-gray-200 rounded-xl p-4 shadow-md">
+        등록된 새소식이 없습니다.
+      </div>
+    );
+  }
+
   return (
     <section aria-label="새소식 목록" className="border border-gray-200 rounded-xl p-4 shadow-md">
       <ul>

@@ -1,12 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Logo } from '@/assets/Logo';
 import logoPng from '@/assets/logo.png';
 
 function cn(...inputs: ClassValue[]) {
@@ -22,10 +21,15 @@ const NAV_ITEMS = [
 ];
 
 export default function Header() {
-  const pathname = usePathname();
+  const routerPathname = usePathname() ?? '';
+  const [pathname, setPathname] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isAdminPage = pathname.startsWith('/admin');
+  useEffect(() => {
+    setPathname(routerPathname);
+  }, [routerPathname]);
+
+  const isAdminPage = routerPathname.startsWith('/admin');
 
   const config = {
     logoHref: isAdminPage ? '/admin' : '/',
@@ -49,10 +53,9 @@ export default function Header() {
 
         )}
       >
-        <div className="mx-auto flex w-full max-w-350 items-center px-6">
+        <div className="mx-auto flex w-full max-w-350 items-center px-4 md:px-20">
           <Link href={config.logoHref} className="shrink-0 flex items-center gap-2">
-            <Image src={logoPng} alt="토이빌리지 엠블럼" className="h-10 w-auto md:h-12" />
-            <Logo className="w-28 h-auto md:w-40" />
+            <Image src={logoPng} alt="토이빌리지 엠블럼" className="h-14 w-auto md:h-16" />
           </Link>
 
           {/* 데스크탑 nav */}

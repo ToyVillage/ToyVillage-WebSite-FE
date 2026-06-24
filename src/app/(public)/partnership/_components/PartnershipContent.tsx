@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import SubHeader from '@/components/layout/SubHeader';
-import chinchilla from '@/assets/animals/Chinchilla.jpeg';
+import banner from '@/assets/animals/banner.png';
 import { createPartnership, PartnershipRequest } from '@/lib/api/partnership';
 import { uploadFilePublic } from '@/lib/api/file';
 
@@ -105,7 +105,7 @@ export function PartnershipContent() {
   if (submitted) {
     return (
       <>
-        <SubHeader imageSrc={chinchilla} title="제휴 문의" subtitle="Partnership" />
+        <SubHeader imageSrc={banner} title="제휴 문의" subtitle="Partnership" />
         <main className="w-full px-4 py-8 md:px-22 md:py-16 flex flex-col items-center gap-4">
           <p className="text-subtitle-1 font-bold text-black">문의가 접수되었습니다.</p>
           <p className="text-body-3 text-gray-500">빠른 시일 내에 연락드리겠습니다.</p>
@@ -116,7 +116,7 @@ export function PartnershipContent() {
 
   return (
     <>
-      <SubHeader imageSrc={chinchilla} title="제휴 문의" subtitle="Partnership" />
+      <SubHeader imageSrc={banner} title="제휴 문의" subtitle="Partnership" />
       <main className="w-full px-4 py-8 md:px-22 md:py-16 mx-auto">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
